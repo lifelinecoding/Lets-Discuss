@@ -11,13 +11,13 @@
         </li>
 
         <?php
-        if ($_SESSION["user"]["username"]) {
+        if (isset($_SESSION["user"]["username"])) {
         ?>
           <li class="nav-item">
             <a class="nav-link text-white"> <?php echo $_SESSION["user"]["username"] ?> </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="?login=true">Logout</a>
+            <a class="nav-link text-white" href="./server/requests.php?logout=true">Logout</a>
           </li>
         <?php
         } else {
