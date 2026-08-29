@@ -1,7 +1,7 @@
-<?php 
+<?php
 session_start();
 include("../common/database.php");
-if(isset($_POST["signup"])){
+if (isset($_POST["signup"])) {
     // Extracting data from the url.
     $username = $_POST["username"];
     $email = $_POST["email"];
@@ -13,12 +13,8 @@ if(isset($_POST["signup"])){
 
     $result = $preparedQuery->execute();
 
-    if($result){
-        echo "User created successfully!";
+    if ($result) {
         $_SESSION["user"] = ["username" => $username, "email" => $email];
-    }
-    else {
-        echo "User registration failed";
+        header("location: /discuss");
     }
 }
-?>

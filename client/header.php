@@ -9,13 +9,30 @@
         <li class="nav-item">
           <a class="nav-link active text-white" href="./">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="?login=true">Login</a>
-        </li>
 
-        <li class="nav-item">
-          <a class="nav-link text-white" href="?signup=true">SignUp</a>
-        </li>
+        <?php
+        if ($_SESSION["user"]["username"]) {
+        ?>
+          <li class="nav-item">
+            <a class="nav-link text-white"> <?php echo $_SESSION["user"]["username"] ?> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="?login=true">Logout</a>
+          </li>
+        <?php
+        } else {
+        ?>
+
+          <li class="nav-item">
+            <a class="nav-link text-white" href="?login=true">Login</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-white" href="?signup=true">SignUp</a>
+          </li>
+        <?php
+        }
+        ?>
         <li class="nav-item">
           <a class="nav-link text-white" href="#">Category</a>
         </li>
