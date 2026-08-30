@@ -13,8 +13,11 @@ if (isset($_POST["signup"])) {
 
     $result = $preparedQuery->execute();
 
+    // echo $result;
+    // echo $preparedQuery ->insert_id;
+
     if ($result) {
-        $_SESSION["user"] = ["username" => $username, "email" => $email];
+        $_SESSION["user"] = ["username" => $username, "email" => $email, "user_id" => $preparedQuery -> insert_id];
         header("location: /discuss");
     }
 }
@@ -28,15 +31,34 @@ else if(isset($_POST["login"])){
 
     if($result -> num_rows == 1){
         $username = "";
+        $id = 0;
         foreach($result as $rows){
             $username = $rows["username"];
+            $id = $rows["id"];
         }
 
-        $_SESSION["user"] = ["username" => $username, "email" => $email];
+        $_SESSION["user"] = ["username" => $username, "email" => $email, "user_id" => $id];
         header("location: /discuss");
     }
 }
 else if(isset($_GET["logout"])){
     session_unset();
     header("location: /discuss");
+}
+else if(isset($_POST["ask"])){
+
+    $title = $_POST["title"];
+    $description = $_POST["description"];
+    $category = $_POST["category"];
+    $user_id = $_SESSION["user"]["user_id"];
+
+    $InsertQuery = "INSERT INTO QUESTIONS (ID, TITLE, DESCRIPTION, CATEGORY, USER_ID) VALUES ('NULL', '$title', '$description', '$category', '$user_id');";
+
+    $preparedQuery = $conn -> prepare($InsertQuery);
+
+    $result = $preparedQuery -> execute();
+
+    if ($result) {
+        header("location: /discuss");
+    }
 }
