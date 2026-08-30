@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-black ">
+<nav class="navbar navbar-expand-lg bg-black py-3">
   <div class="container-fluid">
     <a class="navbar-brand text-white fw-bold " href="#">LetsDiscuss</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,6 +18,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="./server/requests.php?logout=true">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="?ask=true">Ask a Question</a>
           </li>
         <?php
         } else {
