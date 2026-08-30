@@ -12,14 +12,9 @@
         </div>
         <div class="col-6 offset-sm-3 my-3">
             <label for="category" class="form-label fw-bold">Category</label>
-            <select name="category" class="form-control" id="category" >
-                <option value="" disabled selected > --Select--</option>
-                <option value="mobile">Mobile</option>
-                <option value="sports">Sports</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="ganeral">General</option>
-                <option value="technology">Technology</option>
-            </select>
+            <?php
+            include("./client/category.php");
+            ?>
         </div>
         <button type="submit" name="ask" class="btn btn-primary col-6 offset-sm-3 my-3 fw-bold">Submit</button>
     </form>
