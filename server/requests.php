@@ -18,7 +18,7 @@ if (isset($_POST["signup"])) {
 
     if ($result) {
         $_SESSION["user"] = ["username" => $username, "email" => $email, "user_id" => $preparedQuery -> insert_id];
-        header("location: /discuss");
+        header("location: /lets-discuss");
     }
 }
 else if(isset($_POST["login"])){
@@ -38,12 +38,12 @@ else if(isset($_POST["login"])){
         }
 
         $_SESSION["user"] = ["username" => $username, "email" => $email, "user_id" => $id];
-        header("location: /discuss");
+        header("location: /lets-discuss");
     }
 }
 else if(isset($_GET["logout"])){
     session_unset();
-    header("location: /discuss");
+    header("location: /lets-discuss");
 }
 else if(isset($_POST["ask"])){
 
@@ -59,6 +59,6 @@ else if(isset($_POST["ask"])){
     $result = $preparedQuery -> execute();
 
     if ($result) {
-        header("location: /discuss");
+        header("location: /lets-discuss");
     }
 }

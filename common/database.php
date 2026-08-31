@@ -10,5 +10,5 @@
         die("Database not connected: ". $conn->connect_error);
     }
 
-    echo "Database connected successfully!". "<br/>";
+    // echo "Database connected successfully!". "<br/>";
 ?>
