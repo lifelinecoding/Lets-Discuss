@@ -3,3 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.answer{
+    border-bottom: 1px solid gray;
+    padding-top: 2px;
+    flex-wrap: wrap;
+    margin-left: 25px;
+}

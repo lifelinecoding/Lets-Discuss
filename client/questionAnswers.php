@@ -16,9 +16,11 @@
     </div>
 
     <div class="col-md-8">
+        <?php
+        include("./client/answers.php");
+        ?>
         <form action="./server/requests.php" method="POST">
             <div class="mb-3">
-                <label for="answer" class="form-label fw-semibold fs-3">Answer: </label>
                 <input type="hidden" name="question_id" value="<?= $qid ?>">
                 <?php
                 if (!isset($_SESSION["user"]["username"])) {
