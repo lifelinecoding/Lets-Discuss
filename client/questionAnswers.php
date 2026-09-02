@@ -16,14 +16,28 @@
     </div>
 
     <div class="col-md-8">
-        <form action="" method="POST">
+        <form action="./server/requests.php" method="POST">
             <div class="mb-3">
-                <label for="answer" class="form-label fw-semibold">Your Answer</label>
-                <textarea name="answer" id="answer" class="form-control" rows="4"
-                          placeholder="Write your answer here..." required></textarea>
+                <label for="answer" class="form-label fw-semibold fs-3">Answer: </label>
+                <input type="hidden" name="question_id" value="<?= $qid ?>">
+                <?php
+                if (!isset($_SESSION["user"]["username"])) {
+
+                ?>
+                    <h1 class="text-danger fs-5">Login to submit your answer</h1>
+                <?php
+
+                } else {
+                ?>
+                    <textarea name="answer" id="answer" class="form-control" rows="4"
+                        placeholder="Write your answer here..." required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary px-4">Submit Answer</button>
+            <button type="submit" name="ans" class="btn btn-primary px-4">Submit Answer</button>
+        <?php
+                }
+        ?>
+
         </form>
     </div>
 
-</div>   
+</div>

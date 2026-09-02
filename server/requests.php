@@ -62,3 +62,16 @@ else if(isset($_POST["ask"])){
         header("location: /lets-discuss");
     }
 }
+else if(isset($_POST["ans"])){
+    $question_id = $_POST["question_id"];
+    $answer = $_POST["answer"];
+    $user_id = $_SESSION["user"]["user_id"];
+
+    $qeury = $conn -> prepare("INSERT INTO ANSWERS (`ID`, `ANSWERS`,`USER_ID`, `QUESTION_ID`) VALUES ('NULL', '$answer', '$user_id', '$question_id');");
+
+    $result = $qeury -> execute();
+
+    if($result){
+        header("location: /lets-discuss/?q-id=$question_id");
+    }
+}
