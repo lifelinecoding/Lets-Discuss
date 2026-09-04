@@ -17,22 +17,21 @@ if (isset($_POST["signup"])) {
     // echo $preparedQuery ->insert_id;
 
     if ($result) {
-        $_SESSION["user"] = ["username" => $username, "email" => $email, "user_id" => $preparedQuery -> insert_id];
+        $_SESSION["user"] = ["username" => $username, "email" => $email, "user_id" => $preparedQuery->insert_id];
         header("location: /lets-discuss");
     }
-}
-else if(isset($_POST["login"])){
-    $email = $_POST["email"]; 
-    $password = $_POST["password"]; 
+} else if (isset($_POST["login"])) {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
 
     $getQuery = "SELECT * FROM USERS WHERE EMAIL = '$email' AND PASSWORD = '$password'";
-    $result = $conn -> query($getQuery);
+    $result = $conn->query($getQuery);
 
 
-    if($result -> num_rows == 1){
+    if ($result->num_rows == 1) {
         $username = "";
         $id = 0;
-        foreach($result as $rows){
+        foreach ($result as $rows) {
             $username = $rows["username"];
             $id = $rows["id"];
         }
@@ -40,38 +39,35 @@ else if(isset($_POST["login"])){
         $_SESSION["user"] = ["username" => $username, "email" => $email, "user_id" => $id];
         header("location: /lets-discuss");
     }
-}
-else if(isset($_GET["logout"])){
+} else if (isset($_GET["logout"])) {
     session_unset();
     header("location: /lets-discuss");
-}
-else if(isset($_POST["ask"])){
+} else if (isset($_POST["ask"])) {
 
     $title = $_POST["title"];
     $description = $_POST["description"];
     $category = $_POST["category"];
     $user_id = $_SESSION["user"]["user_id"];
 
-    $InsertQuery = "INSERT INTO QUESTIONS (ID, TITLE, DESCRIPTION, CATEGORY, USER_ID) VALUES ('NULL', '$title', '$description', '$category', '$user_id');";
+    $InsertQuery = "INSERT INTO QUESTIONS (`ID`, `TITLE`, `DESCRIPTION`, `CATEGORY`, `USER_ID`) VALUES (?, ?, ?, ?, ?);";
 
-    $preparedQuery = $conn -> prepare($InsertQuery);
+    $preparedQuery = $conn->prepare($InsertQuery);
 
-    $result = $preparedQuery -> execute();
+    $result = $preparedQuery->execute([null, $title, $description, $category, $user_id]);
 
     if ($result) {
         header("location: /lets-discuss");
     }
-}
-else if(isset($_POST["ans"])){
+} else if (isset($_POST["ans"])) {
     $question_id = $_POST["question_id"];
     $answer = $_POST["answer"];
     $user_id = $_SESSION["user"]["user_id"];
 
-    $qeury = $conn -> prepare("INSERT INTO ANSWERS (`ID`, `ANSWERS`,`USER_ID`, `QUESTION_ID`) VALUES ('NULL', '$answer', '$user_id', '$question_id');");
+    $qeury = $conn->prepare("INSERT INTO ANSWERS (`ID`, `ANSWERS`,`USER_ID`, `QUESTION_ID`) VALUES ('NULL', '$answer', '$user_id', '$question_id');");
 
-    $result = $qeury -> execute();
+    $result = $qeury->execute();
 
-    if($result){
+    if ($result) {
         header("location: /lets-discuss/?q-id=$question_id");
     }
 }

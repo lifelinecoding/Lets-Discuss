@@ -1,38 +1,76 @@
 <div class="container py-4">
-    <h1 class="heading offset-md-2 my-4 fs-1 fw-bold">Questions</h1>
 
-    <div class="accordion col-md-6" id="accordionExample">
-        <?php
-        include("./common/database.php");
-        $query = "SELECT * FROM QUESTIONS;";
-
-        $result = $conn->query($query);
-        $i = 0;
-        if ($result->num_rows > 0) {
-            foreach ($result as $rows) {
-                $i++;
-        ?>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button fs-5 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne<?= $i ?>" aria-expanded="false" aria-controls="collapseOne<?= $i ?>">
-                            <?= $rows["title"] ?>
-                        </button>
-                    </h2>
-                    <div id="collapseOne<?= $i ?>" class="accordion-collapse collapse  fs-6" data-bs-parent="#accordionExample">
-                        <div class="accordion-body"> <strong>Description: </strong>
-                            <?= $rows["description"] ?>
-                        </div>
-                    </div>
-                    <a href="./?q-id=<?=$rows['id']?>"><button type="button"  class="btn btn-primary rounded-xl m-2">Answers</button></a>
-                </div>
-
-        <?php
+    <div class="row">
+        <div class="accordion col-md-6" id="accordionExample">
+            <h1 class="heading offset-md-4 my-4 fs-1 fw-bold">Questions</h1>
+            <?php
+            include("./common/database.php");
+            if (isset($_GET["c-id"])) {
+                $cid = $_GET["c-id"];
+                $query = "SELECT * FROM QUESTIONS WHERE CATEGORY=$cid;";
+            } else {
+                $query = "SELECT * FROM QUESTIONS;";
             }
-        }
-        ?>
+
+            $result = $conn->query($query);
+            $i = 0;
+            if ($result->num_rows > 0) {
+                foreach ($result as $rows) {
+                    $i++;
+            ?>
+                    <div class="accordion-item heading p-2 border border-primary rounded shadow text-center my-2">
+                        <a href="./?q-id=<?= $rows['id'] ?>" class="text-decoration-none text-black">
+                            <h2 class="accordion-header fs-5">
+                                <?= $rows["title"] ?>
+                            </h2>
+                        </a>
+                    </div>
+
+            <?php
+                }
+            }
+            else{
+                ?>
+                <div class="accordion-item heading p-2 border border-danger rounded shadow text-center my-2">
+                            <h2 class="accordion-header fs-5 text-danger">
+                                No Question is listed under this category!
+                            </h2>
+                    </div>
+                <?php
+            }
+            ?>
 
 
+        </div>
+        <div class="col-md-6">
+            <h1 class="heading offset-md-4 my-4 fs-1 fw-bold">Category</h1>
+            <?php
+            // include("./common/database.php");
+            $query = "SELECT * FROM CATEGORY;";
+
+            $result = $conn->query($query);
+            $i = 0;
+            if ($result->num_rows > 0) {
+                foreach ($result as $rows) {
+                    $i++;
+            ?>
+
+                    <div class="heading p-2 border border-primary rounded shadow text-center my-2">
+                        <a href="./?c-id=<?= $rows['id'] ?>" class="text-decoration-none text-black">
+                        <h2 class="accordion-header fs-5">
+                            <?= ucfirst($rows["category"]) ?>
+                        </h2>
+                        </a>
+                    </div>
+
+            <?php
+                }
+            }
+            ?>
+
+
+        </div>
     </div>
+</div>
 
 </div>
