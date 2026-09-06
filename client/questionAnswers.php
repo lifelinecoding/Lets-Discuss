@@ -36,7 +36,7 @@
                         <textarea name="answer" id="answer" class="form-control" rows="4"
                             placeholder="Write your answer here..." required></textarea>
                 <!-- </div> -->
-                <button type="submit" name="ans" class="btn btn-primary px-4">Submit Answer</button>
+                <button type="submit" name="ans" class="btn btn-primary px-4 my-3">Submit Answer</button>
             <?php
                     }
             ?>
