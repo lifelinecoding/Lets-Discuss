@@ -14,6 +14,9 @@
                 $query = "SELECT * FROM QUESTIONS WHERE USER_ID = $uid";
             } else if (isset($_GET["latest"])) {
                 $query = "SELECT * FROM QUESTIONS ORDER BY ID DESC;";
+            } else if (isset($_GET["search"])) {
+                $search = $_GET["search"];
+                $query = "SELECT * FROM QUESTIONS WHERE TITLE LIKE '%$search%'";
             } else {
                 $query = "SELECT * FROM QUESTIONS;";
             }
