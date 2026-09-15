@@ -40,9 +40,6 @@
         }
         ?>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Category</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link text-white" href="./?latest=true">Latest Questions</a>
         </li>
       </ul>

@@ -71,3 +71,23 @@ if (isset($_POST["signup"])) {
         header("location: /lets-discuss/?q-id=$question_id");
     }
 }
+else if(isset($_GET["delete"])){
+$qid = $_GET["delete"];
+
+try {
+    $conn->begin_transaction();
+
+    $deleteQuery = $conn->prepare("DELETE FROM QUESTIONS WHERE ID = ?");
+    $deleteQuery->execute([$qid]);
+
+    $deleteAnswers = $conn->prepare("DELETE FROM ANSWERS WHERE QUESTION_ID = ?");
+    $deleteAnswers->execute([$qid]);
+
+    $conn->commit();
+    $uid = $_SESSION['user']['user_id'];
+    header("location: /lets-discuss/?u-id=$uid");
+} catch (Exception $e) {
+    $conn->rollBack();
+    throw $e;
+}   
+}

@@ -27,12 +27,19 @@
                 foreach ($result as $rows) {
                     $i++;
             ?>
-                    <div class="accordion-item heading p-2 border border-primary rounded shadow text-center my-2">
+                    <div class="accordion-item d-flex justify-content-between heading p-2 border border-primary rounded shadow text-center my-2">
                         <a href="./?q-id=<?= $rows['id'] ?>" class="text-decoration-none text-black">
                             <h2 class="accordion-header fs-5">
                                 <?= $rows["title"] ?>
                             </h2>
                         </a>
+                        <?php  
+                        if(isset($_GET["u-id"])){
+                            ?>
+                                <a class="btn btn-danger" href="./server/requests.php?delete=<?=$rows["id"]  ?>">Delete</a>
+                            <?php
+                        }
+                        ?>
                     </div>
 
                 <?php
