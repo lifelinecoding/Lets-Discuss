@@ -8,10 +8,10 @@ if (isset($_POST["signup"])) {
     $password = $_POST["password"];
     $address = $_POST["address"];
 
-    $InsertQuery = "INSERT INTO USERS (ID, USERNAME, EMAIL, PASSWORD, ADDRESS) VALUES ('NULL', '$username', '$email', '$password', '$address');";
+    $InsertQuery = "INSERT INTO USERS (ID, USERNAME, EMAIL, PASSWORD, ADDRESS) VALUES (?,?,?,?,?);";
     $preparedQuery =  $conn->prepare($InsertQuery);
 
-    $result = $preparedQuery->execute();
+    $result = $preparedQuery->execute([null,$username,$email, $password, $address]);
 
     // echo $result;
     // echo $preparedQuery ->insert_id;
@@ -63,9 +63,9 @@ if (isset($_POST["signup"])) {
     $answer = $_POST["answer"];
     $user_id = $_SESSION["user"]["user_id"];
 
-    $qeury = $conn->prepare("INSERT INTO ANSWERS (`ID`, `ANSWERS`,`USER_ID`, `QUESTION_ID`) VALUES ('NULL', '$answer', '$user_id', '$question_id');");
+    $qeury = $conn->prepare("INSERT INTO ANSWERS (`ID`, `ANSWERS`,`USER_ID`, `QUESTION_ID`) VALUES (?,?,?,?);");
 
-    $result = $qeury->execute();
+    $result = $qeury->execute([null, $answer, $user_id, $question_id]);
 
     if ($result) {
         header("location: /lets-discuss/?q-id=$question_id");
